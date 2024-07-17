@@ -15,7 +15,7 @@ async function read() {
 
 async function findById(id: number) {
     const result = await db.query(`SELECT * FROM todos WHERE id = $1`, [id]);
-    return result.rows[0];
+    return result.rows[0]; 
 }
 
 async function update(id: number, item: string) {
@@ -23,15 +23,15 @@ async function update(id: number, item: string) {
         `UPDATE todos SET item = $1 WHERE id = $2 RETURNING *`,
         [item, id]
     );
-    return result.rows[0];
+    return result.rows[0]; 
 }
 
-async function deleting(id: number) {
+async function deleteById(id: number) {
     const result = await db.query(
         `DELETE FROM todos WHERE id = $1 RETURNING *`,
         [id]
     );
-    return result.rowCount > 0;
+    return result.rowCount > 0; 
 }
 
 export const todoRepository = {
@@ -39,5 +39,5 @@ export const todoRepository = {
     read,
     findById,
     update,
-    deleting
+    deleteById
 };
